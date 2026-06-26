@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>🏆 Bolão Copa do Mundo 2026</title>
+    <title>🏆 Bolão Copa do Mundo 2026 - Família Almeida</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f0f4f1; margin: 0; padding: 20px; }
         .container { max-width: 1400px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
@@ -22,6 +22,63 @@
         .floating-actions { position: fixed; bottom: 20px; right: 20px; }
         .btn-main { padding: 15px 30px; background: #005a2b; color: white; border: none; border-radius: 50px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
         .badge-total { font-weight: bold; font-size: 16px; color: #005a2b; }
+		
+		.regras-bolao{
+    max-width:850px;
+    margin:30px auto;
+    background:#ffffff;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+    padding:25px;
+    border-top:6px solid #009739;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.regras-bolao h2{
+    text-align:center;
+    color:#009739;
+    margin-bottom:25px;
+}
+
+.regras-bolao h3{
+    margin-top:30px;
+    color:#1565C0;
+}
+
+.regras-bolao table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.regras-bolao th{
+    background:#009739;
+    color:#fff;
+    padding:12px;
+    font-size:15px;
+}
+
+.regras-bolao td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+.regras-bolao tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+.regras-bolao tr:hover{
+    background:#e8f5e9;
+}
+
+.observacao{
+    margin-top:25px;
+    padding:15px;
+    border-left:5px solid #ff9800;
+    background:#fff8e1;
+    border-radius:8px;
+    font-size:15px;
+}
     </style>
 </head>
 <body onload="calcularBolao()">
@@ -793,85 +850,159 @@
     </table>
 </div>
 
+<div class="regras-bolao">
+    <h2>🏆 Regras do Bolão Família Almeida 2026</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Acerto</th>
+                <th>Pontos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>✅ Vencedor com placar exato</td>
+                <td><strong>10</strong></td>
+            </tr>
+            <tr>
+                <td>✅ Empate com placar exato</td>
+                <td><strong>10</strong></td>
+            </tr>
+            <tr>
+                <td>✅ Vencedor + um placar correto</td>
+                <td><strong>8</strong></td>
+            </tr>
+            <tr>
+                <td>✅ Empate sem placar exato</td>
+                <td><strong>8</strong></td>
+            </tr>
+            <tr>
+                <td>✅ Apenas vencedor correto</td>
+                <td><strong>6</strong></td>
+            </tr>
+            <tr>
+                <td>✅ Apenas um placar correto</td>
+                <td><strong>2</strong></td>
+            </tr>
+            <tr>
+                <td>❌ Nenhum acerto</td>
+                <td><strong>0</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>⭐ Pontuação Extra</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Palpite</th>
+                <th>Pontos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>🏆 Campeão</td>
+                <td><strong>25</strong></td>
+            </tr>
+            <tr>
+                <td>🥈 Vice-campeão</td>
+                <td><strong>20</strong></td>
+            </tr>
+            <tr>
+                <td>👟 Artilheiro</td>
+                <td><strong>30</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="observacao">
+        <strong>⚠ Observação:</strong><br>
+        Vale apenas o resultado do <strong>tempo normal (90 minutos + acréscimos)</strong>.<br>
+        Prorrogação e disputa por pênaltis <strong>não são consideradas</strong> para efeito de pontuação.
+    </div>
+</div>
+
 <div class="floating-actions">
     <button class="btn-main" onclick="calcularBolao()">🔄 Calcular Pontuações</button>
 </div>
 
-<script>
-function atualizarNomes() {
-    for(var p=1; p<=4; p++) {
-        var txt = document.getElementById('name-p' + p).value;
-        var targets = document.querySelectorAll('.lbl-name-p' + p);
-        for(var i=0; i<targets.length; i++) {
-            targets[i].innerText = txt;
-        }
-    }
-}
+	<script>
+		function atualizarNomes() {
+			for(var p=1; p<=4; p++) {
+				var txt = document.getElementById('name-p' + p).value;
+				var targets = document.querySelectorAll('.lbl-name-p' + p);
+				for(var i=0; i<targets.length; i++) {
+					targets[i].innerText = txt;
+				}
+			}
+		}
 
-function calcularPontosRegra(resA, resB, palA, palB) {
-    if (resA === "" || resB === "") return 0;
-    
-    var realA = parseInt(resA), realB = parseInt(resB);
-    var pA = parseInt(palA), pB = parseInt(palB);
+		function calcularPontosRegra(resA, resB, palA, palB) {
+			if (resA === "" || resB === "") return 0;
+			
+			var realA = parseInt(resA), realB = parseInt(resB);
+			var pA = parseInt(palA), pB = parseInt(palB);
 
-    var vRealA = realA > realB, vRealB = realB > realA, empReal = realA === realB;
-    var vPalA = pA > pB, vPalB = pB > pA, empPal = pA === pB;
+			var vRealA = realA > realB, vRealB = realB > realA, empReal = realA === realB;
+			var vPalA = pA > pB, vPalB = pB > pA, empPal = pA === pB;
 
-    var placarExato = (realA === pA && realB === pB);
-    var umPlacarCerto = (realA === pA || realB === pB);
+			var placarExato = (realA === pA && realB === pB);
+			var umPlacarCerto = (realA === pA || realB === pB);
 
-    if (empReal) {
-        if (empPal) return placarExato ? 10 : 8;
-        return umPlacarCerto ? 2 : 0;
-    }
-    if ((vRealA && vPalA) || (vRealB && vPalB)) {
-        if (placarExato) return 10;
-        if (umPlacarCerto) return 8;
-        return 6;
-    }
-    return umPlacarCerto ? 2 : 0;
-}
+			if (empReal) {
+				if (empPal) return placarExato ? 10 : 8;
+				return umPlacarCerto ? 2 : 0;
+			}
+			if ((vRealA && vPalA) || (vRealB && vPalB)) {
+				if (placarExato) return 10;
+				if (umPlacarCerto) return 8;
+				return 6;
+			}
+			return umPlacarCerto ? 2 : 0;
+		}
 
-function calcularBolao() {
-    var rows = document.querySelectorAll('.match-row');
-    var totais = { 1: 0, 2: 0, 3: 0, 4: 0 };
+		function calcularBolao() {
+			var rows = document.querySelectorAll('.match-row');
+			var totais = { 1: 0, 2: 0, 3: 0, 4: 0 };
 
-    rows.forEach(function(row) {
-        var oficialA = row.querySelector('.calc-oficial-a').value;
-        var oficialB = row.querySelector('.calc-oficial-b').value;
+			rows.forEach(function(row) {
+				var oficialA = row.querySelector('.calc-oficial-a').value;
+				var oficialB = row.querySelector('.calc-oficial-b').value;
 
-        for(var p=1; p<=4; p++) {
-            var palA = row.querySelector('.calc-p' + p + '-a').value;
-            var palB = row.querySelector('.calc-p' + p + '-b').value;
-            var pontos = 0;
-            
+				for(var p=1; p<=4; p++) {
+					var palA = row.querySelector('.calc-p' + p + '-a').value;
+					var palB = row.querySelector('.calc-p' + p + '-b').value;
+					var pontos = 0;
+					
 
-if (oficialA !== "" && oficialB !== "") {
-pontos = calcularPontosRegra(oficialA, oficialB, palA, palB);
-totais[p] += pontos;
-}
-row.querySelector('.calc-p' + p + '-pts').innerText = pontos;
-}
-});
-for(var p=1; p<=4; p++) {
-document.getElementById('total-p' + p).innerText = totais[p];
-}
-ordenarRanking();
-}
-function ordenarRanking() {
-var tbody = document.getElementById('ranking-body');
-var rows = Array.from(tbody.querySelectorAll('tr'));
-rows.sort(function(a, b) {
-var ptsA = parseInt(a.querySelector('td:last-child').innerText);
-var ptsB = parseInt(b.querySelector('td:last-child').innerText);
-return ptsB - ptsA;
-});
-rows.forEach(function(row, index) {
-row.querySelector('td:first-child').innerText = (index + 1) + 'º';
-tbody.appendChild(row);
-});
-}
-atualizarNomes();
-</script>
-
+		if (oficialA !== "" && oficialB !== "") {
+		pontos = calcularPontosRegra(oficialA, oficialB, palA, palB);
+		totais[p] += pontos;
+		}
+		row.querySelector('.calc-p' + p + '-pts').innerText = pontos;
+		}
+		});
+		for(var p=1; p<=4; p++) {
+		document.getElementById('total-p' + p).innerText = totais[p];
+		}
+		ordenarRanking();
+		}
+		function ordenarRanking() {
+		var tbody = document.getElementById('ranking-body');
+		var rows = Array.from(tbody.querySelectorAll('tr'));
+		rows.sort(function(a, b) {
+		var ptsA = parseInt(a.querySelector('td:last-child').innerText);
+		var ptsB = parseInt(b.querySelector('td:last-child').innerText);
+		return ptsB - ptsA;
+		});
+		rows.forEach(function(row, index) {
+		row.querySelector('td:first-child').innerText = (index + 1) + 'º';
+		tbody.appendChild(row);
+		});
+		}
+		atualizarNomes();
+	</script>
+</html>
 
