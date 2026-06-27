@@ -79,6 +79,76 @@
     border-radius:8px;
     font-size:15px;
 }
+
+.table-container{
+    max-height:75vh;
+    overflow:auto;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+/* Mantém a tabela inteira */
+table{
+    border-collapse:collapse;
+    width:max-content;
+    min-width:100%;
+}
+
+/* Cabeçalho */
+thead th{
+    position:sticky;
+    top:0;
+    background:#0b5ed7;
+    color:white;
+    z-index:100;
+    padding:10px;
+    border:1px solid #999;
+    white-space:nowrap;
+}
+
+/* Todas as células */
+td{
+    border:1px solid #ddd;
+    padding:8px;
+    background:white;
+}
+
+/* Primeira coluna (Nº) fixa */
+thead th:nth-child(1){
+    left:0;
+    z-index:102;
+}
+
+tbody td:nth-child(1){
+    position:sticky;
+    left:0;
+    background:#f8f9fa;
+    z-index:50;
+}
+
+/* Segunda coluna (Confronto) fixa */
+thead th:nth-child(2){
+    left:55px;
+    z-index:102;
+}
+
+tbody td:nth-child(2){
+    position:sticky;
+    left:55px;
+    background:#f8f9fa;
+    z-index:50;
+}
+
+/* Destaque ao passar o mouse */
+tbody tr:hover td{
+    background:#eef6ff;
+}
+
+/* Mantém as colunas fixas na cor correta */
+tbody tr:hover td:nth-child(1),
+tbody tr:hover td:nth-child(2){
+    background:#dceeff;
+}
     </style>
 </head>
 <body onload="calcularBolao()">
@@ -112,785 +182,788 @@
     </div>
 
     <h2>⚽ Agenda de Partidas</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Nº</th>
-                <th>Confronto</th>
-                <th class="oficial-cell">Placar Oficial</th>
-                <th class="lbl-name-p1">Antonio</th>
-                <th class="lbl-name-p2">Simone</th>
-                <th class="lbl-name-p3">Julio Cesar</th>
-                <th class="lbl-name-p4">Lucas</th>
-            </tr>
-        </thead>
-        <tbody id="matches-container">
-                        <!-- JOGO 1 -->
-            <tr class="match-row">
-                <td><strong>1</strong></td>
-                <td><strong>México</strong> vs <strong>África do Sul</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 2 -->
-            <tr class="match-row">
-                <td><strong>2</strong></td>
-                <td><strong>Coreia do Sul</strong> vs <strong>Tchéquia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 3 -->
-            <tr class="match-row">
-                <td><strong>3</strong></td>
-                <td><strong>Canadá</strong> vs <strong>Bósnia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 4 -->
-            <tr class="match-row">
-                <td><strong>4</strong></td>
-                <td><strong>Catar</strong> vs <strong>Suíça</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 5 -->
-            <tr class="match-row">
-                <td><strong>5</strong></td>
-                <td><strong>Brasil</strong> vs <strong>Marrocos</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 6 -->
-            <tr class="match-row">
-                <td><strong>6</strong></td>
-                <td><strong>Haiti</strong> vs <strong>Escócia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 7 -->
-            <tr class="match-row">
-                <td><strong>7</strong></td>
-                <td><strong>EUA</strong> vs <strong>Paraguai</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 8 -->
-            <tr class="match-row">
-                <td><strong>8</strong></td>
-                <td><strong>Austrália</strong> vs <strong>Turquia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 9 -->
-            <tr class="match-row">
-                <td><strong>9</strong></td>
-                <td><strong>Alemanha</strong> vs <strong>Curaçau</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="7"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="5"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="4"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 10 -->
-            <tr class="match-row">
-                <td><strong>10</strong></td>
-                <td><strong>Costa do Marfim</strong> vs <strong>Equador</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 11 -->
-            <tr class="match-row">
-                <td><strong>11</strong></td>
-                <td><strong>Holanda</strong> vs <strong>Japão</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 12 -->
-            <tr class="match-row">
-                <td><strong>12</strong></td>
-                <td><strong>Suécia</strong> vs <strong>Tunísia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 13 -->
-            <tr class="match-row">
-                <td><strong>13</strong></td>
-                <td><strong>Bélgica</strong> vs <strong>Egito</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 14 -->
-            <tr class="match-row">
-                <td><strong>14</strong></td>
-                <td><strong>Irã</strong> vs <strong>Nova Zelândia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 15 -->
-            <tr class="match-row">
-                <td><strong>15</strong></td>
-                <td><strong>Espanha</strong> vs <strong>Cabo Verde</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="6"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 16 -->
-            <tr class="match-row">
-                <td><strong>16</strong></td>
-                <td><strong>Arábia Saudita</strong> vs <strong>Uruguai</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 17 -->
-            <tr class="match-row">
-                <td><strong>17</strong></td>
-                <td><strong>França</strong> vs <strong>Senegal</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 18 -->
-            <tr class="match-row">
-                <td><strong>18</strong></td>
-                <td><strong>Iraque</strong> vs <strong>Noruega</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="4"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 19 -->
-            <tr class="match-row">
-                <td><strong>19</strong></td>
-                <td><strong>Argentina</strong> vs <strong>Argélia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 20 -->
-            <tr class="match-row">
-                <td><strong>20</strong></td>
-                <td><strong>Áustria</strong> vs <strong>Jordânia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 21 -->
-            <tr class="match-row">
-                <td><strong>21</strong></td>
-                <td><strong>Portugal</strong> vs <strong>RD do Congo</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="4"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 22 -->
-            <tr class="match-row">
-                <td><strong>22</strong></td>
-                <td><strong>Uzbequistão</strong> vs <strong>Colômbia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 23 -->
-            <tr class="match-row">
-                <td><strong>23</strong></td>
-                <td><strong>Inglaterra</strong> vs <strong>Croácia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 24 -->
-            <tr class="match-row">
-                <td><strong>24</strong></td>
-                <td><strong>Gana</strong> vs <strong>Panamá</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 25 -->
-            <tr class="match-row">
-                <td><strong>25</strong></td>
-                <td><strong>México</strong> vs <strong>Coreia do Sul</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 26 -->
-            <tr class="match-row">
-                <td><strong>26</strong></td>
-                <td><strong>Tchéquia</strong> vs <strong>África do Sul</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 27 -->
-            <tr class="match-row">
-                <td><strong>27</strong></td>
-                <td><strong>Canadá</strong> vs <strong>Catar</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="6"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 28 -->
-            <tr class="match-row">
-                <td><strong>28</strong></td>
-                <td><strong>Suíça</strong> vs <strong>Bósnia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 29 -->
-            <tr class="match-row">
-                <td><strong>29</strong></td>
-                <td><strong>Brasil</strong> vs <strong>Haiti</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 30 -->
-            <tr class="match-row">
-                <td><strong>30</strong></td>
-                <td><strong>Escócia</strong> vs <strong>Marrocos</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 31 -->
-            <tr class="match-row">
-                <td><strong>31</strong></td>
-                <td><strong>EUA</strong> vs <strong>Austrália</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 32 -->
-            <tr class="match-row">
-                <td><strong>32</strong></td>
-                <td><strong>Turquia</strong> vs <strong>Paraguai</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="3"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 33 -->
-            <tr class="match-row">
-                <td><strong>33</strong></td>
-                <td><strong>Alemanha</strong> vs <strong>Costa do Marfim</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 34 -->
-            <tr class="match-row">
-                <td><strong>34</strong></td>
-                <td><strong>Equador</strong> vs <strong>Curaçau</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 35 -->
-            <tr class="match-row">
-                <td><strong>35</strong></td>
-                <td><strong>Holanda</strong> vs <strong>Suécia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 36 -->
-            <tr class="match-row">
-                <td><strong>36</strong></td>
-                <td><strong>Tunísia</strong> vs <strong>Japão</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="4"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 37 -->
-            <tr class="match-row">
-                <td><strong>37</strong></td>
-                <td><strong>Bélgica</strong> vs <strong>Irã</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 38 -->
-            <tr class="match-row">
-                <td><strong>38</strong></td>
-                <td><strong>Nova Zelândia</strong> vs <strong>Egito</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 39 -->
-            <tr class="match-row">
-                <td><strong>39</strong></td>
-                <td><strong>Espanha</strong> vs <strong>Arábia Saudita</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 40 -->
-            <tr class="match-row">
-                <td><strong>40</strong></td>
-                <td><strong>Uruguai</strong> vs <strong>Cabo Verde</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 41 -->
-            <tr class="match-row">
-                <td><strong>41</strong></td>
-                <td><strong>França</strong> vs <strong>Iraque</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 42 -->
-            <tr class="match-row">
-                <td><strong>42</strong></td>
-                <td><strong>Noruega</strong> vs <strong>Senegal</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 43 -->
-            <tr class="match-row">
-                <td><strong>43</strong></td>
-                <td><strong>Argentina</strong> vs <strong>Áustria</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 44 -->
-            <tr class="match-row">
-                <td><strong>44</strong></td>
-                <td><strong>Jordânia</strong> vs <strong>Argélia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 45 -->
-            <tr class="match-row">
-                <td><strong>45</strong></td>
-                <td><strong>Portugal</strong> vs <strong>Uzbequistão</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 46 -->
-            <tr class="match-row">
-                <td><strong>46</strong></td>
-                <td><strong>Colômbia</strong> vs <strong>RD do Congo</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 47 -->
-            <tr class="match-row">
-                <td><strong>47</strong></td>
-                <td><strong>Inglaterra</strong> vs <strong>Gana</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 48 -->
-            <tr class="match-row">
-                <td><strong>48</strong></td>
-                <td><strong>Panamá</strong> vs <strong>Croácia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="3"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 49 -->
-            <tr class="match-row">
-                <td><strong>49</strong></td>
-                <td><strong>Tchéquia</strong> vs <strong>México</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="3"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="4"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 50 -->
-            <tr class="match-row">
-                <td><strong>50</strong></td>
-                <td><strong>África do Sul</strong> vs <strong>Coreia do Sul</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 51 -->
-            <tr class="match-row">
-                <td><strong>51</strong></td>
-                <td><strong>Suíça</strong> vs <strong>Canadá</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 52 -->
-            <tr class="match-row">
-                <td><strong>52</strong></td>
-                <td><strong>Bósnia</strong> vs <strong>Catar</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 53 -->
-            <tr class="match-row">
-                <td><strong>53</strong></td>
-                <td><strong>Escócia</strong> vs <strong>Brasil</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="4"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 54 -->
-            <tr class="match-row">
-                <td><strong>54</strong></td>
-                <td><strong>Marrocos</strong> vs <strong>Haiti</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 55 -->
-            <tr class="match-row">
-                <td><strong>55</strong></td>
-                <td><strong>Turquia</strong> vs <strong>EUA</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 56 -->
-            <tr class="match-row">
-                <td><strong>56</strong></td>
-                <td><strong>Paraguai</strong> vs <strong>Austrália</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 57 -->
-            <tr class="match-row">
-                <td><strong>57</strong></td>
-                <td><strong>Equador</strong> vs <strong>Alemanha</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 58 -->
-            <tr class="match-row">
-                <td><strong>58</strong></td>
-                <td><strong>Curaçau</strong> vs <strong>Costa do Marfim</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="4"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 59 -->
-            <tr class="match-row">
-                <td><strong>59</strong></td>
-                <td><strong>Tunísia</strong> vs <strong>Holanda</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 60 -->
-            <tr class="match-row">
-                <td><strong>60</strong></td>
-                <td><strong>Japão</strong> vs <strong>Suécia</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 61 -->
-            <tr class="match-row">
-                <td><strong>61</strong></td>
-                <td><strong>Nova Zelândia</strong> vs <strong>Bélgica</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 62 -->
-            <tr class="match-row">
-                <td><strong>62</strong></td>
-                <td><strong>Egito</strong> vs <strong>Irã</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 63 -->
-            <tr class="match-row">
-                <td><strong>63</strong></td>
-                <td><strong>Uruguai</strong> vs <strong>Espanha</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 64 -->
-            <tr class="match-row">
-                <td><strong>64</strong></td>
-                <td><strong>Cabo Verde</strong> vs <strong>Arábia Saudita</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 65 -->
-            <tr class="match-row">
-                <td><strong>65</strong></td>
-                <td><strong>Noruega</strong> vs <strong>França</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="3"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 66 -->
-            <tr class="match-row">
-                <td><strong>66</strong></td>
-                <td><strong>Senegal</strong> vs <strong>Iraque</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 67 -->
-            <tr class="match-row">
-                <td><strong>67</strong></td>
-                <td><strong>Jordânia</strong> vs <strong>Argentina</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 68 -->
-            <tr class="match-row">
-                <td><strong>68</strong></td>
-                <td><strong>Argélia</strong> vs <strong>Áustria</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 69 -->
-            <tr class="match-row">
-                <td><strong>69</strong></td>
-                <td><strong>Colômbia</strong> vs <strong>Portugal</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 70 -->
-            <tr class="match-row">
-                <td><strong>70</strong></td>
-                <td><strong>RD do Congo</strong> vs <strong>Uzbequistão</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 71 -->
-            <tr class="match-row">
-                <td><strong>71</strong></td>
-                <td><strong>Panamá</strong> vs <strong>Inglaterra</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
-            <!-- JOGO 72 -->
-            <tr class="match-row">
-                <td><strong>72</strong></td>
-                <td><strong>Croácia</strong> vs <strong>Gana</strong></td>
-                <td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
-                <td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
-            </tr>
 
-        </tbody>
-    </table>
-</div>
+	<div class="table-container">
+		<table>
+			<thead>
+				<tr>
+					<th>Nº</th>
+					<th>Confronto</th>
+					<th class="oficial-cell">Placar Oficial</th>
+					<th class="lbl-name-p1">Antonio</th>
+					<th class="lbl-name-p2">Simone</th>
+					<th class="lbl-name-p3">Julio Cesar</th>
+					<th class="lbl-name-p4">Lucas</th>
+				</tr>
+			</thead>
+			<tbody id="matches-container">
+							<!-- JOGO 1 -->
+				<tr class="match-row">
+					<td><strong>1</strong></td>
+					<td><strong>México</strong> vs <strong>África do Sul</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 2 -->
+				<tr class="match-row">
+					<td><strong>2</strong></td>
+					<td><strong>Coreia do Sul</strong> vs <strong>Tchéquia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 3 -->
+				<tr class="match-row">
+					<td><strong>3</strong></td>
+					<td><strong>Canadá</strong> vs <strong>Bósnia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 4 -->
+				<tr class="match-row">
+					<td><strong>4</strong></td>
+					<td><strong>Catar</strong> vs <strong>Suíça</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 5 -->
+				<tr class="match-row">
+					<td><strong>5</strong></td>
+					<td><strong>Brasil</strong> vs <strong>Marrocos</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 6 -->
+				<tr class="match-row">
+					<td><strong>6</strong></td>
+					<td><strong>Haiti</strong> vs <strong>Escócia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 7 -->
+				<tr class="match-row">
+					<td><strong>7</strong></td>
+					<td><strong>EUA</strong> vs <strong>Paraguai</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 8 -->
+				<tr class="match-row">
+					<td><strong>8</strong></td>
+					<td><strong>Austrália</strong> vs <strong>Turquia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 9 -->
+				<tr class="match-row">
+					<td><strong>9</strong></td>
+					<td><strong>Alemanha</strong> vs <strong>Curaçau</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="7"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="5"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="4"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 10 -->
+				<tr class="match-row">
+					<td><strong>10</strong></td>
+					<td><strong>Costa do Marfim</strong> vs <strong>Equador</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 11 -->
+				<tr class="match-row">
+					<td><strong>11</strong></td>
+					<td><strong>Holanda</strong> vs <strong>Japão</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 12 -->
+				<tr class="match-row">
+					<td><strong>12</strong></td>
+					<td><strong>Suécia</strong> vs <strong>Tunísia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 13 -->
+				<tr class="match-row">
+					<td><strong>13</strong></td>
+					<td><strong>Bélgica</strong> vs <strong>Egito</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 14 -->
+				<tr class="match-row">
+					<td><strong>14</strong></td>
+					<td><strong>Irã</strong> vs <strong>Nova Zelândia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 15 -->
+				<tr class="match-row">
+					<td><strong>15</strong></td>
+					<td><strong>Espanha</strong> vs <strong>Cabo Verde</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="6"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 16 -->
+				<tr class="match-row">
+					<td><strong>16</strong></td>
+					<td><strong>Arábia Saudita</strong> vs <strong>Uruguai</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 17 -->
+				<tr class="match-row">
+					<td><strong>17</strong></td>
+					<td><strong>França</strong> vs <strong>Senegal</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 18 -->
+				<tr class="match-row">
+					<td><strong>18</strong></td>
+					<td><strong>Iraque</strong> vs <strong>Noruega</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="4"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 19 -->
+				<tr class="match-row">
+					<td><strong>19</strong></td>
+					<td><strong>Argentina</strong> vs <strong>Argélia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 20 -->
+				<tr class="match-row">
+					<td><strong>20</strong></td>
+					<td><strong>Áustria</strong> vs <strong>Jordânia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 21 -->
+				<tr class="match-row">
+					<td><strong>21</strong></td>
+					<td><strong>Portugal</strong> vs <strong>RD do Congo</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="4"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 22 -->
+				<tr class="match-row">
+					<td><strong>22</strong></td>
+					<td><strong>Uzbequistão</strong> vs <strong>Colômbia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 23 -->
+				<tr class="match-row">
+					<td><strong>23</strong></td>
+					<td><strong>Inglaterra</strong> vs <strong>Croácia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 24 -->
+				<tr class="match-row">
+					<td><strong>24</strong></td>
+					<td><strong>Gana</strong> vs <strong>Panamá</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 25 -->
+				<tr class="match-row">
+					<td><strong>25</strong></td>
+					<td><strong>México</strong> vs <strong>Coreia do Sul</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 26 -->
+				<tr class="match-row">
+					<td><strong>26</strong></td>
+					<td><strong>Tchéquia</strong> vs <strong>África do Sul</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 27 -->
+				<tr class="match-row">
+					<td><strong>27</strong></td>
+					<td><strong>Canadá</strong> vs <strong>Catar</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="6"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 28 -->
+				<tr class="match-row">
+					<td><strong>28</strong></td>
+					<td><strong>Suíça</strong> vs <strong>Bósnia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 29 -->
+				<tr class="match-row">
+					<td><strong>29</strong></td>
+					<td><strong>Brasil</strong> vs <strong>Haiti</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 30 -->
+				<tr class="match-row">
+					<td><strong>30</strong></td>
+					<td><strong>Escócia</strong> vs <strong>Marrocos</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 31 -->
+				<tr class="match-row">
+					<td><strong>31</strong></td>
+					<td><strong>EUA</strong> vs <strong>Austrália</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 32 -->
+				<tr class="match-row">
+					<td><strong>32</strong></td>
+					<td><strong>Turquia</strong> vs <strong>Paraguai</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="3"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 33 -->
+				<tr class="match-row">
+					<td><strong>33</strong></td>
+					<td><strong>Alemanha</strong> vs <strong>Costa do Marfim</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 34 -->
+				<tr class="match-row">
+					<td><strong>34</strong></td>
+					<td><strong>Equador</strong> vs <strong>Curaçau</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 35 -->
+				<tr class="match-row">
+					<td><strong>35</strong></td>
+					<td><strong>Holanda</strong> vs <strong>Suécia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 36 -->
+				<tr class="match-row">
+					<td><strong>36</strong></td>
+					<td><strong>Tunísia</strong> vs <strong>Japão</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="4"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 37 -->
+				<tr class="match-row">
+					<td><strong>37</strong></td>
+					<td><strong>Bélgica</strong> vs <strong>Irã</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 38 -->
+				<tr class="match-row">
+					<td><strong>38</strong></td>
+					<td><strong>Nova Zelândia</strong> vs <strong>Egito</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 39 -->
+				<tr class="match-row">
+					<td><strong>39</strong></td>
+					<td><strong>Espanha</strong> vs <strong>Arábia Saudita</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 40 -->
+				<tr class="match-row">
+					<td><strong>40</strong></td>
+					<td><strong>Uruguai</strong> vs <strong>Cabo Verde</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 41 -->
+				<tr class="match-row">
+					<td><strong>41</strong></td>
+					<td><strong>França</strong> vs <strong>Iraque</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 42 -->
+				<tr class="match-row">
+					<td><strong>42</strong></td>
+					<td><strong>Noruega</strong> vs <strong>Senegal</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 43 -->
+				<tr class="match-row">
+					<td><strong>43</strong></td>
+					<td><strong>Argentina</strong> vs <strong>Áustria</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 44 -->
+				<tr class="match-row">
+					<td><strong>44</strong></td>
+					<td><strong>Jordânia</strong> vs <strong>Argélia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 45 -->
+				<tr class="match-row">
+					<td><strong>45</strong></td>
+					<td><strong>Portugal</strong> vs <strong>Uzbequistão</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 46 -->
+				<tr class="match-row">
+					<td><strong>46</strong></td>
+					<td><strong>Colômbia</strong> vs <strong>RD do Congo</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="2"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 47 -->
+				<tr class="match-row">
+					<td><strong>47</strong></td>
+					<td><strong>Inglaterra</strong> vs <strong>Gana</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="3"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 48 -->
+				<tr class="match-row">
+					<td><strong>48</strong></td>
+					<td><strong>Panamá</strong> vs <strong>Croácia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="3"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 49 -->
+				<tr class="match-row">
+					<td><strong>49</strong></td>
+					<td><strong>Tchéquia</strong> vs <strong>México</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="3"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="4"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 50 -->
+				<tr class="match-row">
+					<td><strong>50</strong></td>
+					<td><strong>África do Sul</strong> vs <strong>Coreia do Sul</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 51 -->
+				<tr class="match-row">
+					<td><strong>51</strong></td>
+					<td><strong>Suíça</strong> vs <strong>Canadá</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 52 -->
+				<tr class="match-row">
+					<td><strong>52</strong></td>
+					<td><strong>Bósnia</strong> vs <strong>Catar</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 53 -->
+				<tr class="match-row">
+					<td><strong>53</strong></td>
+					<td><strong>Escócia</strong> vs <strong>Brasil</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="4"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 54 -->
+				<tr class="match-row">
+					<td><strong>54</strong></td>
+					<td><strong>Marrocos</strong> vs <strong>Haiti</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="4"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="3"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 55 -->
+				<tr class="match-row">
+					<td><strong>55</strong></td>
+					<td><strong>Turquia</strong> vs <strong>EUA</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="3"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="3"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 56 -->
+				<tr class="match-row">
+					<td><strong>56</strong></td>
+					<td><strong>Paraguai</strong> vs <strong>Austrália</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 57 -->
+				<tr class="match-row">
+					<td><strong>57</strong></td>
+					<td><strong>Equador</strong> vs <strong>Alemanha</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="2"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 58 -->
+				<tr class="match-row">
+					<td><strong>58</strong></td>
+					<td><strong>Curaçau</strong> vs <strong>Costa do Marfim</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="0"> x <input type="number" class="score-input calc-oficial-b" value="2"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="4"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="2"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="4"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 59 -->
+				<tr class="match-row">
+					<td><strong>59</strong></td>
+					<td><strong>Tunísia</strong> vs <strong>Holanda</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="3"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 60 -->
+				<tr class="match-row">
+					<td><strong>60</strong></td>
+					<td><strong>Japão</strong> vs <strong>Suécia</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="1"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="3"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 61 -->
+				<tr class="match-row">
+					<td><strong>61</strong></td>
+					<td><strong>Nova Zelândia</strong> vs <strong>Bélgica</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="0"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="3"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 62 -->
+				<tr class="match-row">
+					<td><strong>62</strong></td>
+					<td><strong>Egito</strong> vs <strong>Irã</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="0"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 63 -->
+				<tr class="match-row">
+					<td><strong>63</strong></td>
+					<td><strong>Uruguai</strong> vs <strong>Espanha</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="1"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 64 -->
+				<tr class="match-row">
+					<td><strong>64</strong></td>
+					<td><strong>Cabo Verde</strong> vs <strong>Arábia Saudita</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="2"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="2"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="2"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="1"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 65 -->
+				<tr class="match-row">
+					<td><strong>65</strong></td>
+					<td><strong>Noruega</strong> vs <strong>França</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="1"> x <input type="number" class="score-input calc-oficial-b" value="4"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="0"> x <input type="number" class="score-input calc-p1-b" value="1"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="0"> x <input type="number" class="score-input calc-p2-b" value="1"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="2"> x <input type="number" class="score-input calc-p3-b" value="3"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="2"> x <input type="number" class="score-input calc-p4-b" value="1"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 66 -->
+				<tr class="match-row">
+					<td><strong>66</strong></td>
+					<td><strong>Senegal</strong> vs <strong>Iraque</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value="5"> x <input type="number" class="score-input calc-oficial-b" value="0"></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value="1"> x <input type="number" class="score-input calc-p1-b" value="0"><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value="1"> x <input type="number" class="score-input calc-p2-b" value="0"><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value="1"> x <input type="number" class="score-input calc-p3-b" value="0"><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value="0"> x <input type="number" class="score-input calc-p4-b" value="2"><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 67 -->
+				<tr class="match-row">
+					<td><strong>67</strong></td>
+					<td><strong>Jordânia</strong> vs <strong>Argentina</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 68 -->
+				<tr class="match-row">
+					<td><strong>68</strong></td>
+					<td><strong>Argélia</strong> vs <strong>Áustria</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 69 -->
+				<tr class="match-row">
+					<td><strong>69</strong></td>
+					<td><strong>Colômbia</strong> vs <strong>Portugal</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 70 -->
+				<tr class="match-row">
+					<td><strong>70</strong></td>
+					<td><strong>RD do Congo</strong> vs <strong>Uzbequistão</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 71 -->
+				<tr class="match-row">
+					<td><strong>71</strong></td>
+					<td><strong>Panamá</strong> vs <strong>Inglaterra</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
+				<!-- JOGO 72 -->
+				<tr class="match-row">
+					<td><strong>72</strong></td>
+					<td><strong>Croácia</strong> vs <strong>Gana</strong></td>
+					<td class="oficial-cell"><input type="number" class="score-input calc-oficial-a" value=""> x <input type="number" class="score-input calc-oficial-b" value=""></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p1-a" value=""> x <input type="number" class="score-input calc-p1-b" value=""><span class="pts-display">Pts: <span class="calc-p1-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p2-a" value=""> x <input type="number" class="score-input calc-p2-b" value=""><span class="pts-display">Pts: <span class="calc-p2-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p3-a" value=""> x <input type="number" class="score-input calc-p3-b" value=""><span class="pts-display">Pts: <span class="calc-p3-pts pts-bold">0</span></span></td>
+					<td class="part-cell"><input type="number" class="score-input calc-p4-a" value=""> x <input type="number" class="score-input calc-p4-b" value=""><span class="pts-display">Pts: <span class="calc-p4-pts pts-bold">0</span></span></td>
+				</tr>
 
-<div class="regras-bolao">
-    <h2>🏆 Regras do Bolão Família Almeida 2026</h2>
+			</tbody>
+		</table>
+	</div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Acerto</th>
-                <th>Pontos</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>✅ Vencedor com placar exato</td>
-                <td><strong>10</strong></td>
-            </tr>
-            <tr>
-                <td>✅ Empate com placar exato</td>
-                <td><strong>10</strong></td>
-            </tr>
-            <tr>
-                <td>✅ Vencedor + um placar correto</td>
-                <td><strong>8</strong></td>
-            </tr>
-            <tr>
-                <td>✅ Empate sem placar exato</td>
-                <td><strong>8</strong></td>
-            </tr>
-            <tr>
-                <td>✅ Apenas vencedor correto</td>
-                <td><strong>6</strong></td>
-            </tr>
-            <tr>
-                <td>✅ Apenas um placar correto</td>
-                <td><strong>2</strong></td>
-            </tr>
-            <tr>
-                <td>❌ Nenhum acerto</td>
-                <td><strong>0</strong></td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="regras-bolao">
+		<h2>🏆 Regras do Bolão Família Almeida 2026</h2>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Acerto</th>
+					<th>Pontos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>✅ Vencedor com placar exato</td>
+					<td><strong>10</strong></td>
+				</tr>
+				<tr>
+					<td>✅ Empate com placar exato</td>
+					<td><strong>10</strong></td>
+				</tr>
+				<tr>
+					<td>✅ Vencedor + um placar correto</td>
+					<td><strong>8</strong></td>
+				</tr>
+				<tr>
+					<td>✅ Empate sem placar exato</td>
+					<td><strong>8</strong></td>
+				</tr>
+				<tr>
+					<td>✅ Apenas vencedor correto</td>
+					<td><strong>6</strong></td>
+				</tr>
+				<tr>
+					<td>✅ Apenas um placar correto</td>
+					<td><strong>2</strong></td>
+				</tr>
+				<tr>
+					<td>❌ Nenhum acerto</td>
+					<td><strong>0</strong></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
     <h3>⭐ Pontuação Extra</h3>
 
